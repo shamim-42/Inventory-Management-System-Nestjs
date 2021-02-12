@@ -30,74 +30,74 @@ export class IdeaController {
     options.id && this.logger.log('IDEA ' + JSON.stringify(options.id));
   }
 
-  @Get()
-  showAllIdeas(@Query('page') page: number) {
-    return this.ideaService.showAll(page);
-  }
+  // @Get()
+  // showAllIdeas(@Query('page') page: number) {
+  //   return this.ideaService.showAll(page);
+  // }
 
-  @Get('/newest')
-  showNewestIdeas(@Query('page') page: number) {
-    return this.ideaService.showAll(page, true);
-  }
+  // @Get('/newest')
+  // showNewestIdeas(@Query('page') page: number) {
+  //   return this.ideaService.showAll(page, true);
+  // }
 
-  @Post()
-  @UseGuards(new AuthGuard())
-  @UsePipes(new ValidationPipe())
-  createIdea(@User('id') user, @Body() body: IdeaDTO) {
-    this.logData({ user, body });
-    return this.ideaService.create(user, body);
-  }
+  // @Post()
+  // @UseGuards(new AuthGuard())
+  // @UsePipes(new ValidationPipe())
+  // createIdea(@User('id') user, @Body() body: IdeaDTO) {
+  //   this.logData({ user, body });
+  //   return this.ideaService.create(user, body);
+  // }
 
-  @Get(':id')
-  readIdea(@Param('id') id: string) {
-    this.logData({ id });
-    return this.ideaService.read(id);
-  }
+  // @Get(':id')
+  // readIdea(@Param('id') id: string) {
+  //   this.logData({ id });
+  //   return this.ideaService.read(id);
+  // }
 
-  @Put(':id')
-  @UseGuards(new AuthGuard())
-  @UsePipes(new ValidationPipe())
-  updateIdea(
-    @Param('id') id: string,
-    @User('id') user,
-    @Body() body: Partial<IdeaDTO>,
-  ) {
-    this.logData({ id, user, body });
-    return this.ideaService.update(id, user, body);
-  }
+  // @Put(':id')
+  // @UseGuards(new AuthGuard())
+  // @UsePipes(new ValidationPipe())
+  // updateIdea(
+  //   @Param('id') id: string,
+  //   @User('id') user,
+  //   @Body() body: Partial<IdeaDTO>,
+  // ) {
+  //   this.logData({ id, user, body });
+  //   return this.ideaService.update(id, user, body);
+  // }
 
-  @Delete(':id')
-  @UseGuards(new AuthGuard())
-  destroyIdea(@Param('id') id: string, @User('id') user) {
-    this.logData({ id, user });
-    return this.ideaService.destroy(id, user);
-  }
+  // @Delete(':id')
+  // @UseGuards(new AuthGuard())
+  // destroyIdea(@Param('id') id: string, @User('id') user) {
+  //   this.logData({ id, user });
+  //   return this.ideaService.destroy(id, user);
+  // }
 
-  @Post(':id/upvote')
-  @UseGuards(new AuthGuard())
-  upvoteIdea(@Param('id') id: string, @User('id') user: string) {
-    this.logData({ id, user });
-    return this.ideaService.upvote(id, user);
-  }
+  // @Post(':id/upvote')
+  // @UseGuards(new AuthGuard())
+  // upvoteIdea(@Param('id') id: string, @User('id') user: string) {
+  //   this.logData({ id, user });
+  //   return this.ideaService.upvote(id, user);
+  // }
 
-  @Post(':id/downvote')
-  @UseGuards(new AuthGuard())
-  downvoteIdea(@Param('id') id: string, @User('id') user: string) {
-    this.logData({ id, user });
-    return this.ideaService.downvote(id, user);
-  }
+  // @Post(':id/downvote')
+  // @UseGuards(new AuthGuard())
+  // downvoteIdea(@Param('id') id: string, @User('id') user: string) {
+  //   this.logData({ id, user });
+  //   return this.ideaService.downvote(id, user);
+  // }
 
-  @Post(':id/bookmark')
-  @UseGuards(new AuthGuard())
-  bookmarkIdea(@Param('id') id: string, @User('id') user: string) {
-    this.logData({ id, user });
-    return this.ideaService.bookmark(id, user);
-  }
+  // @Post(':id/bookmark')
+  // @UseGuards(new AuthGuard())
+  // bookmarkIdea(@Param('id') id: string, @User('id') user: string) {
+  //   this.logData({ id, user });
+  //   return this.ideaService.bookmark(id, user);
+  // }
 
-  @Delete(':id/bookmark')
-  @UseGuards(new AuthGuard())
-  unbookmarkIdea(@Param('id') id: string, @User('id') user: string) {
-    this.logData({ id, user });
-    return this.ideaService.unbookmark(id, user);
-  }
+  // @Delete(':id/bookmark')
+  // @UseGuards(new AuthGuard())
+  // unbookmarkIdea(@Param('id') id: string, @User('id') user: string) {
+  //   this.logData({ id, user });
+  //   return this.ideaService.unbookmark(id, user);
+  // }
 }

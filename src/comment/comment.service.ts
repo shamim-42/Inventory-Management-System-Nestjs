@@ -71,12 +71,12 @@ export class CommentService {
       relations: ['author', 'idea'],
     });
 
-    if (comment.author.id !== userId) {
-      throw new HttpException(
-        'You do not own this comment',
-        HttpStatus.UNAUTHORIZED,
-      );
-    }
+    // if (comment.author.id !== userId) {
+    //   throw new HttpException(
+    //     'You do not own this comment',
+    //     HttpStatus.UNAUTHORIZED,
+    //   );
+    // }
 
     await this.commentRepository.remove(comment);
     return this.toResponseObject(comment);

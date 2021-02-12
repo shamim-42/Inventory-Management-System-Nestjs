@@ -19,6 +19,7 @@ export class CategoriesResolvers {
 
     @Query('category')
     async findOneById(obj, args, context, info): Promise<CategoriesEntity> {
+
         const id = args['id']
         return await this.categoriesService.findOneById(id);
     }
