@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, CreateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, CreateDateColumn, ManyToMany, JoinTable } from 'typeorm';
 import { UserRO } from './user.dto';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
+import { ShopEntity } from 'shop/shop.entity';
 @Entity()
 export class UserEntity {
   @PrimaryGeneratedColumn() id: number;
@@ -12,7 +13,7 @@ export class UserEntity {
   @Column({ length: 32, type: 'varchar' })
   phone: string;
 
-  @Column({ length: 64, type: 'varchar' })
+  @Column({ length: 64, type: 'varchar', nullable: true })
   email: string;
 
   @Column({ length: 64 })
@@ -20,6 +21,10 @@ export class UserEntity {
 
   @CreateDateColumn()
   created: Date;
+
+  @ManyToMany(type=>ShopEntity, shop=> shop.members)
+  @JoinTable() // @JoinTable() is must for ManyToMany relation but not for ManyToOne
+  shops: ShopEntity[]
 
   ////////////////// Some essentials functions  ////////
   @BeforeInsert()
@@ -62,92 +67,3 @@ export class UserEntity {
   }
 }
 
-
-
-
-// import {
-//   Entity,
-//   PrimaryGeneratedColumn,
-//   Column,
-//   CreateDateColumn,
-//   BeforeInsert,
-//   OneToMany,
-//   ManyToMany,
-//   JoinTable,
-// } from 'typeorm';
-// import * as bcrypt from 'bcryptjs';
-// import * as jwt from 'jsonwebtoken';
-
-// import { IdeaEntity } from '../idea/idea.entity';
-// import { UserRO } from './user.dto';
-
-// @Entity('user')
-// export class UserEntity {
-//   @PrimaryGeneratedColumn('uuid')
-//   id: string;
-
-//   @CreateDateColumn()
-//   created: Date;
-
-//   @Column({
-//     type: 'varchar',
-//     length: 32,
-//     unique: true,
-//   })
-//   username: string;
-
-//   @Column({type: 'varchar', length: '32'})
-//   password: string;
-
-//   @OneToMany(type => IdeaEntity, idea => idea.author, { cascade: true })
-//   ideas: IdeaEntity[];
-
-//   @ManyToMany(type => IdeaEntity, { cascade: true })
-//   @JoinTable()
-//   bookmarks: IdeaEntity[];
-
-//   @BeforeInsert()
-//   async hashPassword() {
-//     this.password = await bcrypt.hash(this.password, 10);
-//   }
-
-//   async comparePassword(attempt: string): Promise<boolean> {
-//     return await bcrypt.compare(attempt, this.password);
-//   }
-
-//   toResponseObject(showToken: boolean = true): UserRO {
-//     const { id, created, username, token } = this;
-//     const responseObject: UserRO = {
-//       id,
-//       created,
-//       username,
-//     };
-
-//     if (this.ideas) {
-//       responseObject.ideas = this.ideas;
-//     }
-
-//     if (this.bookmarks) {
-//       responseObject.bookmarks = this.bookmarks;
-//     }
-
-//     if (showToken) {
-//       responseObject.token = token;
-//     }
-
-//     return responseObject;
-//   }
-
-//   private get token(): string {
-//     const { id, username } = this;
-
-//     return jwt.sign(
-//       {
-//         id,
-//         username,
-//       },
-//       process.env.SECRET,
-//       { expiresIn: '7d' },
-//     );
-//   }
-// }

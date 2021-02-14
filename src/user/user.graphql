@@ -1,9 +1,10 @@
 type User {
-  id: ID!
+  id: Int!
   name: String!
   created: Date!
   phone: String
   email: String
+  shops: [Shop]
 }
 
 type Auth {
@@ -14,6 +15,7 @@ type Auth {
 type Query {
   users(page: Int): [User!]
   user(phone: String!): User
+  userShops(userId: Int!): User
   whoami: User
 }
 

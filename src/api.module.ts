@@ -3,13 +3,11 @@ import { Module } from '@nestjs/common';
 
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
-import { IdeaModule } from './idea/idea.module';
 import { UserModule } from './user/user.module';
-import { CommentModule } from './comment/comment.module';
 import { CategoriesModule } from './categories/categories.module';
 
 @Module({
-  imports: [IdeaModule, UserModule, CommentModule, CategoriesModule],
+  imports: [UserModule, CategoriesModule],
   providers: [
     {
       provide: APP_FILTER,
@@ -20,6 +18,6 @@ import { CategoriesModule } from './categories/categories.module';
       useClass: LoggingInterceptor,
     },
   ],
-  exports: [IdeaModule, UserModule, CommentModule],
+  exports: [UserModule],
 })
 export class ApiModule {}

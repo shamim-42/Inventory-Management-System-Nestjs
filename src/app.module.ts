@@ -10,7 +10,6 @@ import { CategoriesModule } from './categories/categories.module';
 import { ProductModule } from './product/product.module';
 import { ShopModule } from './shop/shop.module';
 import { UserModule } from 'user/user.module';
-
 @Module({
   imports: [
     TypeOrmModule.forRoot(),

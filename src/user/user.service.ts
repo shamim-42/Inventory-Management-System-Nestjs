@@ -51,4 +51,14 @@ export class UserService {
     await this.userRepository.save(user);
     return user.toResponseObject();
   }
+
+  async userShops(userId: Number){
+    const allShopsOfThisUser = await this.userRepository.findOne({
+      where: {
+        id: userId
+      },
+      relations: ['shops']
+    })
+    return allShopsOfThisUser;
+  }
 }

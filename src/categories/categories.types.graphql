@@ -1,12 +1,12 @@
 type Query {
     categories: [Category]
-    category(id: ID!): Category
+    category(id: Int!): Category
 }
 
 type Mutation{
     createCategory(data: CategoryInput!): Category
-    updateCategory(id: ID!): Boolean
-    delCategory(id: ID!): Boolean
+    updateCategory(id: Int!): Boolean
+    delCategory(id: Int!): Boolean
 }
 
 type Category{

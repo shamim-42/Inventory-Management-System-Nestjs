@@ -1,14 +1,14 @@
 type Query {
   shops: [Shop]
-  shop(id: ID!): Shop
+  shop(id: Int!): Shop
   usershops: [UserShops]
   usershop: UserShops
 }
 
 type Mutation {
   createShop(data: ShopCreateInput!): Shop
-  updateShop(id: ID!, data: ShopUpdateInput!): Boolean
-  deleteShop(id: ID!): Boolean
+  updateShop(id: Int!, data: ShopUpdateInput!): Boolean
+  deleteShop(id: Int!): Boolean
 
   createUserShop(data: UserShopCreateInput!): UserShops
 }
@@ -20,7 +20,8 @@ type Shop {
   description: String
   logo: String
   banner: String
-#   products: [Product]
+  products: [Product]
+  members: [User]
 
 }
 
